@@ -1,6 +1,6 @@
 {
-  "name": "vue-lic-test",
-  "description": "learn vue-cli",
+  "name": "vue-lic-webapp",
+  "description": "vue-cli",
   "version": "1.0.0",
   "author": "wngzhe",
   "private": true,
