@@ -1,6 +1,7 @@
 # vue-lic-test
 
-> learn vue-cli
+> building vue_webapp by vue_cli
+把前端逼成后端真的好么~~~~(>_<)~~~~
 
 ## Build Setup
 
