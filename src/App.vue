@@ -1,17 +1,22 @@
 <template>
   <div id="app">
   <div class="he">翁棋</div>
+  <list></list>
   </div>
 </template>
 
 <script>
+import list from './js/component/list.vue'
 export default {
   name: 'app',
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
     }
-  }
+  },
+  components:{
+  list,
+  },
 }
 </script>
 
