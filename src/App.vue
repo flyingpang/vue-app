@@ -1,7 +1,7 @@
 <template>
   <div id="app">
   <div class="he">翁棋</div>
-  <list></list>
+  <list v-bind:msse="data1"></list>
   </div>
 </template>
 
@@ -11,7 +11,8 @@ export default {
   name: 'app',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'Welcome to Your Vue.js App',
+      data1:[{title:'1',imgsrc:'./src/img/timg.jpg'},{title:'2',imgsrc:'./src/img/timg.jpg'},{title:'3',imgsrc:'./src/img/timg.jpg'},{title:'4',imgsrc:'./src/img/timg.jpg'}]
     }
   },
   components:{

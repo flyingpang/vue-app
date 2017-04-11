@@ -10,5 +10,5 @@ require('./js/app_move.js')
 new Vue({
   el: '#app',
   render: h => h(App),
-  
+
 })
