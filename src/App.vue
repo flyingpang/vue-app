@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-  <div class="he">翁棋</div>
-  <list v-bind:goodsMsg="data1"></list>
+  <div class="he">翁棋商城</div>
+  <list v-bind:goodsMsg="data1" v-on:shopclick="shopCartGoods"></list>
   </div>
 </template>
 
@@ -12,6 +12,7 @@ export default {
   data () {
     return {
       msg: 'Welcome to Your Vue.js App',
+      goods:0,
       data1:[
       {title:'1',imgsrc:'./src/img/timg.jpg'},
       {title:'2',imgsrc:'./src/img/timg.jpg'},
@@ -27,6 +28,12 @@ export default {
   components:{
   list,
   },
+  methods:{
+    shopCartGoods:function(){
+      this.goods+=1;
+      alert('加入购物车商品总数'+this.goods)
+    }
+  }
 }
 </script>
 

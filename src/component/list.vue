@@ -30,7 +30,8 @@
 },
 methods:{
   shopclick:function(i){
-    alert(i)
+    alert('当前商品id'+i)
+    this.$emit('shopclick')
   }
 }
 }
