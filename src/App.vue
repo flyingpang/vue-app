@@ -2,6 +2,7 @@
   <div id="app">
   <div class="he">翁棋商城</div>
   <list v-bind:goodsMsg="data1" v-on:shopclick="shopCartGoods"></list>
+  <div>结算、查看</div>
   </div>
 </template>
 

@@ -1,12 +1,21 @@
-function qido() {
-    var ss = document.documentElement.clientWidth;
-    aa = ss / 320;
-    var html = document.getElementsByTagName('html')[0];
-    html.style.fontSize = aa * 10 + 'px';
+var resetFs= {
+    timeoutId:"null",
+    performProcessing:function(){
+        var ss = document.documentElement.clientWidth;
+        var aa = ss / 320;
+        var html = document.getElementsByTagName('html')[0];
+        html.style.fontSize = aa * 10 + 'px';
+    },
+    process:function(){
+        clearTimeout(this.timeoutId);
+        this.timeoutId=setTimeout(function(){
+            resetFs.performProcessing();
+        },100)
+    }
 }
 window.onload = function () {
-    qido();
+    resetFs.process()
 }
 window.onresize = function () {
-    qido();
+    resetFs.process()
 }
