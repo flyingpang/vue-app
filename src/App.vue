@@ -1,13 +1,14 @@
 <template>
   <div id="app">
-  <div class="he">翁棋商城</div>
+  <div class="he">**商城</div>
   <list v-bind:goodsMsg="data1" v-on:shopclick="shopCartGoods"></list>
-  <div>结算、查看</div>
+  <shopcart>111</shopcart>
   </div>
 </template>
 
 <script>
 import list from './component/list.vue'
+import shopcart from './component/shopcart.vue'
 export default {
   name: 'app',
   data () {
@@ -15,19 +16,20 @@ export default {
       msg: 'Welcome to Your Vue.js App',
       goods:0,
       data1:[
-      {title:'1',imgsrc:'./src/img/timg.jpg'},
-      {title:'2',imgsrc:'./src/img/timg.jpg'},
-      {title:'3',imgsrc:'./src/img/timg.jpg'},
-      {title:'4',imgsrc:'./src/img/timg.jpg'},
-      {title:'1',imgsrc:'./src/img/timg.jpg'},
-      {title:'2',imgsrc:'./src/img/timg.jpg'},
-      {title:'3',imgsrc:'./src/img/timg.jpg'},
-      {title:'4',imgsrc:'./src/img/timg.jpg'},
+      {id:1,title:'1',imgsrc:'./src/img/timg1.jpg',price:10},
+      {id:2,title:'2',imgsrc:'./src/img/timg2.jpg',price:20},
+      {id:3,title:'3',imgsrc:'./src/img/timg3.jpg',price:30},
+      {id:4,title:'4',imgsrc:'./src/img/timg1.jpg',price:40},
+      {id:5,title:'1',imgsrc:'./src/img/timg3.jpg',price:50},
+      {id:6,title:'2',imgsrc:'./src/img/timg2.jpg',price:60},
+      {id:7,title:'3',imgsrc:'./src/img/timg1.jpg',price:70},
+      {id:8,title:'4',imgsrc:'./src/img/timg2.jpg',price:80},
       ]
     }
   },
   components:{
-  list,
+    list,
+    shopcart,
   },
   methods:{
     shopCartGoods:function(){

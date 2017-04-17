@@ -29,6 +29,13 @@ module.exports = {
         loader: 'babel-loader',
         exclude: /node_modules/
       },
+      // {
+      //     test: /\.(png|jpe?g|gif|ico)(\?\S*)?$/,
+      //     loader: 'file-loader',
+      //     query: {
+      //         name: 'img/[name].[ext]'
+      //   }
+      // },
       {
         test: /\.(png|jpg|gif|svg)$/,
         loader: 'file-loader',
@@ -36,6 +43,7 @@ module.exports = {
           name: '[name].[ext]?[hash]'
         }
       }
+
     ]
   },
   resolve: {
