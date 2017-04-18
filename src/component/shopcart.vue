@@ -1,19 +1,26 @@
 <template>
-<div class="sc-wrap">
-    <div class="sc-list" v-if="listShow">
+<div class="sc-wrap" v-bind:class="{'sc-wrap-active':listShow}" @click="listShow=false">
+    <div class="sc-list" v-bind:class="{'sc-list-active':listShow}">
         <div class="sc-list-headr" >
             <div class="sc-list-headr-title">已选商品</div>
             <div class="sc-list-headr-clear">
             <span class="sc-list-headr-clear-icon">
                 <svg class="icon icon-bin"><use xlink:href="#icon-bin"></use></svg>
             </span>
-
                 <span class="sc-list-headr-clear-text">清空</span>
             </div>
 
         </div>
-         <ul>
-             <li class="sc-list-li" v-for="(item,index) in list">{{item}}index{{index}}</li>
+         <ul class="sc-list-ul">
+             <li class="sc-list-li" v-for="(item,index) in list">
+                <div class="fl sc-list-li-title">烟台大樱桃 大樱桃，也称西洋樱桃，南方区域一般称为“车厘子”</div>
+                <div class="fl sc-list-li-price">￥11.01</div>
+                <div class="fl sc-list-li-number">
+                    <span class="sc-list-li-number-span number-reduce">-</span>
+                    <span class="sc-list-li-number-span number-value">2</span>
+                    <span class="sc-list-li-number-span number-add">+</span>
+                </div>
+             </li>
         </ul>
 
     </div>
@@ -32,7 +39,7 @@
 <path d="M32 16v-12h-24c0-1.105-0.895-2-2-2h-6v2h4l1.502 12.877c-0.915 0.733-1.502 1.859-1.502 3.123 0 2.209 1.791 4 4 4h24v-2h-24c-1.105 0-2-0.895-2-2 0-0.007 0-0.014 0-0.020l26-3.98z"></path>
 </symbol>
     </div>
-    <div class="sc-btn-wrap" @click="listShow=!listShow">
+    <div class="sc-btn-wrap" @click.stop="listShow=!listShow">
         <svg class="icon icon-cart"><use xlink:href="#icon-cart"></use></svg>立即支付
     </div>
 
@@ -63,11 +70,12 @@ module.exports={
 <style lang='scss'>
     $iconColor:#F56353;
     $border1:1px solid #ddd;
-    $boxshow1:0.1rem 0.1rem 0.3rem #ddd;
-    $bgwrap:rgba(0,0,0,.5);
+    $boxshow1:0.1rem 0.1rem 0.1rem #ddd;
+    $bgwrap:rgba(0,0,0,0.5);
     $sc-btn-wrap-height:3rem;
     $clearTextColor:#666;
     $sclistbg:#f7f7f7;
+    $priceColor:#FC3A0E;
     .icon {
       display: inline-block;
       width: 1em;
@@ -76,14 +84,23 @@ module.exports={
       stroke: currentColor;
       fill: currentColor;
     }
+    .fl{
+        float:left;
+    }
     .sc-wrap{
-            background:$bgwrap;
-            top:0;
+            background:rgba(0,0,0,0);
             position: fixed;
+            height: 3rem;
             bottom: 0;
             left: 0;
             width: 100%;
-            z-index: 9998;
+            z-index: 998;
+            transition: background-color  0.1s ease-out ;
+            transition: height  0 ease-out 0.2s;
+    }
+    .sc-wrap-active{
+        height:100%;
+        background-color:$bgwrap;
     }
     .sc-list{
         position: absolute;
@@ -91,6 +108,12 @@ module.exports={
         left: 0;
         width:100%;
         background:#fff;
+        height:0;
+        transition: height  0.3s ease-out ;
+
+    }
+    .sc-list-active{
+            height:70%;
     }
     .sc-btn-wrap{
         height:$sc-btn-wrap-height;
@@ -147,8 +170,68 @@ module.exports={
         vertical-align: top;
         color:$clearTextColor;
     }
+     .sc-list-ul{
+        height:100%;
+        width:100%;
+        padding-bottom: 3rem;
+        overflow: scroll;
+
+     }
     .sc-list-li{
         border-bottom:  $border1;
         box-shadow: $boxshow1;
+        height:6.3rem;
+    }
+    .sc-list-li-title{
+        box-sizing:border-box;
+        width:56%;
+        font-size: 1.4rem;
+        line-height:6.3rem;
+        padding-left:0.5rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-wrap: nowrap;
+        white-space: nowrap;
+        color:#333;
+    }
+    .sc-list-li-price{
+        width:18%;
+        height:6.3rem;
+        line-height:6.3rem;
+        color:$priceColor;
+        font-size:1.2rem;
+        text-align: right;
+        /* background:red; */
+    }
+    .sc-list-li-number{
+        width:26%;
+        height:6.3rem;
+        /* background:#09c; */
+    }
+    .sc-list-li-number-span{
+        display:inline-block;
+        margin-top:2.15rem;
+        float:left;
+        text-align: center;
+        line-height:1.7rem;
+        width:2rem;
+        height:2rem;
+        font-size:1.6rem;
+        border:0.1rem solid $priceColor;
+        border-radius: 0.2rem;
+
+    }
+    .number-reduce{
+        color:$priceColor;
+        margin-left: 0.4rem;
+    }
+    .number-add{
+        background:$priceColor;
+        color:#fff;
+    }
+    .number-value{
+        border:none;
+        line-height:2rem;
+        padding:0 0.2rem;
     }
 </style>
