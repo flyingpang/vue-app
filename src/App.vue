@@ -2,7 +2,7 @@
   <div id="app">
   <div class="he">**商城</div>
   <list v-bind:goodsMsg="data1" v-on:shopclick="shopCartGoods"></list>
-  <shopcart>111</shopcart>
+  <shopcart v-bind:shopData='shopcart'></shopcart>
   </div>
 </template>
 
@@ -24,6 +24,14 @@ export default {
       {id:6,title:'2',imgsrc:'./src/img/timg2.jpg',price:60},
       {id:7,title:'3',imgsrc:'./src/img/timg1.jpg',price:70},
       {id:8,title:'4',imgsrc:'./src/img/timg2.jpg',price:80},
+      ],
+      shopcart:[
+        {id:1,title:'烟台大樱桃 大樱桃，也称西洋樱桃，南方区域一般称为“车厘子”',price:10.00,number:1},
+        {id:1,title:'商品1',price:10.01,number:2},
+        {id:1,title:'商品2',price:21.44,number:1},
+        {id:1,title:'商品3',price:25.78,number:1},
+        {id:1,title:'商品4',price:1.88,number:1},
+        {id:1,title:'商品5',price:108.09,number:1},
       ]
     }
   },

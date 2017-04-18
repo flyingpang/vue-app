@@ -12,12 +12,12 @@
 
         </div>
          <ul class="sc-list-ul">
-             <li class="sc-list-li" v-for="(item,index) in list">
-                <div class="fl sc-list-li-title">烟台大樱桃 大樱桃，也称西洋樱桃，南方区域一般称为“车厘子”</div>
-                <div class="fl sc-list-li-price">￥11.01</div>
+             <li class="sc-list-li" v-for="(item,index) in shopData">
+                <div class="fl sc-list-li-title">{{item.title}}</div>
+                <div class="fl sc-list-li-price">￥{{item.price}}</div>
                 <div class="fl sc-list-li-number">
                     <span class="sc-list-li-number-span number-reduce">-</span>
-                    <span class="sc-list-li-number-span number-value">2</span>
+                    <span class="sc-list-li-number-span number-value">{{item.number}}</span>
                     <span class="sc-list-li-number-span number-add">+</span>
                 </div>
              </li>
@@ -49,6 +49,7 @@
 
 <script>
 module.exports={
+    props:['shopData'],
     data:function(){
         return {
             list:[1,2,3,5,6,8,9,0],
@@ -173,7 +174,7 @@ module.exports={
      .sc-list-ul{
         height:100%;
         width:100%;
-        padding-bottom: 3rem;
+        padding-bottom: 4rem;
         overflow: scroll;
 
      }
