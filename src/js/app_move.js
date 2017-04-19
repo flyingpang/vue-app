@@ -14,7 +14,7 @@ var resetFs= {
     }
 }
 window.onload = function () {
-    resetFs.process()
+    resetFs.performProcessing()
 }
 window.onresize = function () {
     resetFs.process()
