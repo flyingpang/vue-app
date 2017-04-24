@@ -2,7 +2,7 @@
   <div id="app">
   <div class="he">**商城</div>
   <list v-bind:goodsMsg="data1" v-on:shopclick="shopCartGoods"></list>
-  <shopcart v-bind:shopData='shopcart'></shopcart>
+  <shopcart v-bind:shopData='shopcart' @add="addNum" @sub="subNum" @clear="clearGoods"></shopcart>
   </div>
 </template>
 
@@ -26,12 +26,12 @@ export default {
       {id:8,title:'4',imgsrc:'./src/img/timg2.jpg',price:80},
       ],
       shopcart:[
-        {id:1,title:'烟台大樱桃 大樱桃，也称西洋樱桃，南方区域一般称为“车厘子”',price:10.00,number:1},
-        {id:1,title:'商品1',price:10.01,number:2},
-        {id:1,title:'商品2',price:21.44,number:1},
-        {id:1,title:'商品3',price:25.78,number:1},
-        {id:1,title:'商品4',price:1.88,number:1},
-        {id:1,title:'商品5',price:108.09,number:1},
+        {id:11,title:'烟台大樱桃 大樱桃，也称西洋樱桃，南方区域一般称为“车厘子”',price:10.00,number:1},
+        {id:12,title:'商品1',price:10.01,number:2},
+        {id:13,title:'商品2',price:21.44,number:1},
+        {id:14,title:'商品3',price:25.78,number:1},
+        {id:15,title:'商品4',price:1.88,number:1},
+        {id:16,title:'商品5',price:108.09,number:1},
       ]
     }
   },
@@ -43,6 +43,26 @@ export default {
     shopCartGoods:function(){
       this.goods+=1;
       alert('加入购物车商品总数'+this.goods)
+    },
+    addNum:function(id,index){
+      this.shopcart[index].number++
+    },
+    subNum:function(id,index){
+      if(this.shopcart[index].number>1){
+          this.shopcart[index].number--;
+      }else if(this.shopcart[index].number=1){
+        if(window.confirm('你确定要删除该商品吗？')){
+                 this.shopcart.splice(index,1)
+              }else{
+             }
+      }
+    },
+    clearGoods:function(){
+      if(window.confirm('你确定要清空商品吗？')){
+        var len=this.shopcart.length
+        this.shopcart.splice(0,len)
+          }else{
+         }
     }
   }
 }

@@ -7,7 +7,7 @@
             <span class="sc-list-headr-clear-icon">
                 <svg class="icon icon-bin"><use xlink:href="#icon-bin"></use></svg>
             </span>
-                <span class="sc-list-headr-clear-text">清空</span>
+                <span class="sc-list-headr-clear-text" @click.stop="clear">清空</span>
             </div>
 
         </div>
@@ -16,9 +16,9 @@
                 <div class="fl sc-list-li-title">{{item.title}}</div>
                 <div class="fl sc-list-li-price">￥{{item.price}}</div>
                 <div class="fl sc-list-li-number">
-                    <span class="sc-list-li-number-span number-reduce">-</span>
+                    <span class="sc-list-li-number-span number-reduce" @click.stop="sub(item.id,index)">-</span>
                     <span class="sc-list-li-number-span number-value">{{item.number}}</span>
-                    <span class="sc-list-li-number-span number-add">+</span>
+                    <span class="sc-list-li-number-span number-add" @click.stop="add(item.id,index)">+</span>
                 </div>
              </li>
         </ul>
@@ -57,7 +57,15 @@ module.exports={
         }
     },
     methods:{
-
+        add:function(i,index){
+            this.$emit('add',i,index)
+        },
+        sub:function(i,index){
+            this.$emit('sub',i,index)
+        },
+        clear:function(){
+            this.$emit('clear')
+        }
     },
       watch: {
         listShowHeight:function(){
