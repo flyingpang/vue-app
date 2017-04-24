@@ -182,7 +182,6 @@ module.exports={
      .sc-list-ul{
         height:100%;
         width:100%;
-        padding-bottom: 4rem;
         overflow: scroll;
 
      }
@@ -190,6 +189,10 @@ module.exports={
         border-bottom:  $border1;
         box-shadow: $boxshow1;
         height:6.3rem;
+    }
+    .sc-list-li:last-child{
+        padding-bottom: 4rem;
+
     }
     .sc-list-li-title{
         box-sizing:border-box;
