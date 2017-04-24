@@ -13,7 +13,6 @@ export default {
   name: 'app',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App',
       goods:0,
       data1:[
       {id:1,title:'1',imgsrc:'./src/img/timg1.jpg',price:10},
@@ -53,8 +52,8 @@ export default {
       }else if(this.shopcart[index].number=1){
         if(window.confirm('你确定要删除该商品吗？')){
                  this.shopcart.splice(index,1)
-              }else{
-             }
+        }else{
+        }
       }
     },
     clearGoods:function(){
