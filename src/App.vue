@@ -76,7 +76,7 @@ body{
   font-size:10px;
 }
 .he{
-  width:32rem;
+  width:100%;
   height:2rem;
   background:#09c
 }

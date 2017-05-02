@@ -1,7 +1,7 @@
 # vue-lic-webapp
 
 > building vue_webapp by vue_cli
-把前端逼成后端真的好么~~~~(>_<)~~~~
+加油吧少年~~~~(>_<)~~~~
 
 ## Build Setup
 
