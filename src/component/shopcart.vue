@@ -40,7 +40,15 @@
 </symbol>
     </div>
     <div class="sc-btn-wrap" @click.stop="listShow=!listShow">
-        <svg class="icon icon-cart"><use xlink:href="#icon-cart"></use></svg>立即支付
+
+        <div class="sc-btn-total">
+            <svg class="icon icon-cart"><use xlink:href="#icon-cart"></use></svg>
+            <div class="fl">
+                <span class="price-small">￥</span><span>{{ total | priceFirst }}</span><span class="price-small">{{ total | priceLast }}</span>
+            </div>
+
+        </div>
+        <div class="sc-btn-pay">去结算</div>
     </div>
 
 </div>
@@ -67,12 +75,41 @@ module.exports={
             this.$emit('clear')
         }
     },
-      watch: {
+    computed: {
         listShowHeight:function(){
+            return 1
+        },
+          total:function(){
+            var total=0;
+              this.shopData.forEach(function(item,index){
+                  total+=item.price*item.number
+              })
 
+              return total;
+          }
+
+      },
+    filters:{
+        priceFirst:function(value){
+            var exg=value.toString().match(/(\d*)\.(\d*)/);
+            if(value){
+                return exg[1]+'.';
+            }else{
+                return 0;
+            }
+
+
+        },
+        priceLast:function(value){
+            var exg=value.toString().match(/(\d*)\.(\d{2})/);
+
+            if(value){
+                return exg[2];
+            }else{
+                return '';
+            }
         }
-
-      }
+    }
 
 }
 </script>
@@ -81,7 +118,7 @@ module.exports={
     $border1:1px solid #ddd;
     $boxshow1:0.1rem 0.1rem 0.1rem #ddd;
     $bgwrap:rgba(0,0,0,0.5);
-    $sc-btn-wrap-height:3rem;
+    $sc-btn-wrap-height:3.633rem;
     $clearTextColor:#666;
     $sclistbg:#f7f7f7;
     $priceColor:#FC3A0E;
@@ -131,15 +168,40 @@ module.exports={
         left: 0;
         width:100%;
         border-top:  $border1;
-        background:#fff;
+        font-size: 1.6rem;
+        background:$sclistbg;
+    }
+    .icon-cart{
+        height:$sc-btn-wrap-height;
+        padding:0 0.8rem 0 0;
+        float: left;
+        color: $iconColor;
+        font-size: 2.6rem;
+    }
+    .sc-btn-total{
+        color: $priceColor;
+        float: left;
+        padding-left:1rem;
+        line-height:$sc-btn-wrap-height;
+    }
+    .price-small{
+        font-size: 1.3rem;
+    }
+    .sc-btn-pay{
+        height:$sc-btn-wrap-height;
+        float: right;
+        text-align: center;
+        width:10rem;
+        font-size: 1.4rem;
+        line-height:$sc-btn-wrap-height;
+        background: -webkit-gradient(linear,right top,left top,from(#f50),to(#ff8000));
+        background: -webkit-linear-gradient(right,#f50,#ff8000);
+        background: linear-gradient(270deg,#f50,#ff8000);
+        color: #fff;
     }
     .icon-bin{
         color:$clearTextColor;
         font-size: 1.8rem;
-    }
-    .icon-cart{
-        font-size:2rem;
-        color:$clearTextColor;
     }
     .sc-list-headr{
         background:$sclistbg;
@@ -184,6 +246,7 @@ module.exports={
         width:100%;
         overflow: scroll;
 
+
      }
     .sc-list-li{
         border-bottom:  $border1;
@@ -191,7 +254,7 @@ module.exports={
         height:6.3rem;
     }
     .sc-list-li:last-child{
-        padding-bottom: 4rem;
+       margin-bottom: 10rem;
 
     }
     .sc-list-li-title{
@@ -213,12 +276,10 @@ module.exports={
         color:$priceColor;
         font-size:1.2rem;
         text-align: right;
-        /* background:red; */
     }
     .sc-list-li-number{
         width:26%;
         height:6.3rem;
-        /* background:#09c; */
     }
     .sc-list-li-number-span{
         display:inline-block;
