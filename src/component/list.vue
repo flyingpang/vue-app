@@ -9,9 +9,9 @@
        <div class="list-li-descripytion">日本产的婴儿床垫，硬度较高，保护新生儿的骨骼健康发育成长，尿湿了也十分方便打理。</div>
        <div class="list-li-price-wrap">
           <span class="list-li-price">￥</span>
-          <span class="list-li-price-number">95.</span>
-          <span class="list-li-price">27</span>
-          <span v-on:click="shopclick(index)" class="list-li-add-shopcart"></span>
+          <span class="list-li-price-number">{{ item.price | priceFirst }}</span>
+          <span class="list-li-price">{{ item.price | priceLast }}</span>
+          <span v-on:click="shopclick(item.id)" class="list-li-add-shopcart"></span>
        </div>
     </div>
 
@@ -22,18 +22,37 @@
 
   <script>
   module.exports = {
-    props:['goodsMsg'],
-  data () {
-  return {
-    msg: 'Welcome to Your Vue.js App'
-  }
-},
-methods:{
-  shopclick:function(i){
-    alert('当前商品id'+i)
-    this.$emit('shopclick')
-  }
-}
+        props:['goodsMsg'],
+      data:function () {
+          return {
+
+          };
+      },
+    methods:{
+      shopclick:function(id){
+        this.$emit('shopclick',id)
+      }
+    },
+      filters:{
+          priceFirst:function(value){
+              var exg=value.toFixed(2).toString().match(/(\d*)\.(\d*)/);
+              if(value){
+                  return exg[1]+'.';
+              }else{
+                  return 0;
+              }
+
+
+          },
+          priceLast:function(value){
+              var exg=value.toFixed(2).toString().match(/(\d*)\.(\d{2})/);
+              if(value){
+                  return exg[2];
+              }else{
+                  return '';
+              }
+          }
+      }
 }
   </script>
   <style lang="scss">

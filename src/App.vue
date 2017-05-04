@@ -1,7 +1,7 @@
 <template>
   <div id="app">
   <div class="he">**商城</div>
-  <list v-bind:goodsMsg="data1" v-on:shopclick="shopCartGoods"></list>
+  <list v-bind:goodsMsg="dataGoods" v-on:shopclick="shopCartGoods"></list>
   <shopcart v-bind:shopData='shopcart' @add="addNum" @sub="subNum" @clear="clearGoods"></shopcart>
   </div>
 </template>
@@ -9,20 +9,21 @@
 <script>
 import list from './component/list.vue'
 import shopcart from './component/shopcart.vue'
+import Vue from 'vue'
 export default {
   name: 'app',
   data () {
     return {
       goods:0,
-      data1:[
-      {id:1,title:'1',imgsrc:'./src/img/timg1.jpg',price:10},
-      {id:2,title:'2',imgsrc:'./src/img/timg2.jpg',price:20},
-      {id:3,title:'3',imgsrc:'./src/img/timg3.jpg',price:30},
-      {id:4,title:'4',imgsrc:'./src/img/timg1.jpg',price:40},
-      {id:5,title:'1',imgsrc:'./src/img/timg3.jpg',price:50},
-      {id:6,title:'2',imgsrc:'./src/img/timg2.jpg',price:60},
-      {id:7,title:'3',imgsrc:'./src/img/timg1.jpg',price:70},
-      {id:8,title:'4',imgsrc:'./src/img/timg2.jpg',price:80},
+      dataGoods:[
+      {id:1,title:'1',imgsrc:'./src/img/timg1.jpg',price:10.00},
+      {id:2,title:'2',imgsrc:'./src/img/timg2.jpg',price:20.02},
+      {id:3,title:'3',imgsrc:'./src/img/timg3.jpg',price:30.09},
+      {id:4,title:'4',imgsrc:'./src/img/timg1.jpg',price:40.40},
+      {id:5,title:'1',imgsrc:'./src/img/timg3.jpg',price:50.70},
+      {id:6,title:'2',imgsrc:'./src/img/timg2.jpg',price:60.65},
+      {id:7,title:'3',imgsrc:'./src/img/timg1.jpg',price:70.43},
+      {id:8,title:'4',imgsrc:'./src/img/timg2.jpg',price:80.66},
       ],
       shopcart:[
         {id:11,title:'烟台大樱桃 大樱桃，也称西洋樱桃，南方区域一般称为“车厘子”',price:10.00,number:1},
@@ -39,12 +40,39 @@ export default {
     shopcart,
   },
   methods:{
-    shopCartGoods:function(){
-      this.goods+=1;
-      alert('加入购物车商品总数'+this.goods)
+    shopCartGoods:function(id){
+        var shopcart=this.shopcart;
+        var dataGoods=this.dataGoods;
+        var is_shopcart=false;
+        var data='';
+        var deepCopy= function(source) {
+            var result={};
+            for (var key in source) {
+                result[key] = typeof source[key]==='object'? deepCoyp(source[key]): source[key];
+            }
+            return result;
+        };
+        for(let i=0;i<shopcart.length;i++){
+            if(shopcart[i].id==id){
+                var n=shopcart[i].number;
+                this.$set(shopcart[i],'number',++n);
+                is_shopcart=true;
+                break
+            }
+        };
+        if(!is_shopcart){
+            for(let i=0;i<dataGoods.length;i++){
+                if(dataGoods[i].id==id){
+                    data=deepCopy(dataGoods[i]);
+                    data.number=1;
+                    break
+                }
+            };
+            shopcart.push(data)
+        }
     },
     addNum:function(id,index){
-      this.shopcart[index].number++
+        this.shopcart[index].number++;
     },
     subNum:function(id,index){
       if(this.shopcart[index].number>1){
