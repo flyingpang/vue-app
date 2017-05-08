@@ -91,7 +91,7 @@ module.exports={
       },
     filters:{
         priceFirst:function(value){
-            var exg=value.toString().match(/(\d*)\.(\d*)/);
+            var exg=value.toFixed(2).toString().match(/(\d*)\.(\d*)/);
             if(value){
                 return exg[1]+'.';
             }else{
@@ -101,7 +101,7 @@ module.exports={
 
         },
         priceLast:function(value){
-            var exg=value.toString().match(/(\d*)\.(\d{2})/);
+            var exg=value.toFixed(2).toString().match(/(\d*)\.(\d{2})/);
 
             if(value){
                 return exg[2];
@@ -114,6 +114,8 @@ module.exports={
 }
 </script>
 <style lang='scss'>
+    $z_index:200;
+    /*层级*/
     $iconColor:#F56353;
     $border1:1px solid #ddd;
     $boxshow1:0.1rem 0.1rem 0.1rem #ddd;
@@ -140,7 +142,7 @@ module.exports={
             bottom: 0;
             left: 0;
             width: 100%;
-            z-index: 998;
+            z-index: $z_index;
             transition: background-color  0.1s ease-out ;
             transition: height  0 ease-out 0.2s;
     }

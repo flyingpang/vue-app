@@ -11,7 +11,7 @@
           <span class="list-li-price">￥</span>
           <span class="list-li-price-number">{{ item.price | priceFirst }}</span>
           <span class="list-li-price">{{ item.price | priceLast }}</span>
-          <span v-on:click="shopclick(item.id)" class="list-li-add-shopcart"></span>
+          <span v-on:click="shopclick($event,item.id)" class="list-li-add-shopcart"></span>
        </div>
     </div>
 
@@ -23,14 +23,14 @@
   <script>
   module.exports = {
         props:['goodsMsg'],
-      data:function () {
+      data(){
           return {
 
           };
       },
     methods:{
-      shopclick:function(id){
-        this.$emit('shopclick',id)
+      shopclick:function(event,id){
+        this.$emit('shopclick',{id:id,event:event})
       }
     },
       filters:{
