@@ -7,7 +7,7 @@
       <div class="shop_ball_wrap" v-show="ball.show">
 
           <div class="shop_ball"   >
-
+            <img class="shop_ball" style="width:100%;height100%;margin-top: -2.4rem;" :src="ball.imgurl" >
           </div>
       </div>
     </transition>
@@ -42,9 +42,9 @@ export default {
         {id:16,title:'商品5',price:108.09,number:1},
       ],
         balls:[
-            {id:1,show:false},
-            {id:2,show:false},
-            {id:3,show:false},
+            {id:1,show:false,imgurl:''},
+            {id:2,show:false,imgurl:''},
+            {id:3,show:false,imgurl:''},
         ],
         balls_id:0,
     }
@@ -54,45 +54,52 @@ export default {
     shopcart,
   },
   methods:{
-      al(obj){
-          console.log('ssss='+obj)
-          console.log(obj.event.pageX)
-          console.log(obj.event.pageY)
-
-      },
     shopCartGoods(obj){
-//          obj={id:id,event:event};
-        this.launch (obj.event)
-        var id=obj.id;
-        var shopcart=this.shopcart;
-        var dataGoods=this.dataGoods;
-        var is_shopcart=false;
-        var data='';
-        var deepCopy= function(source) {
-            var result={};
-            for (var key in source) {
-                result[key] = typeof source[key]==='object'? deepCoyp(source[key]): source[key];
-            }
-            return result;
-        };
-        for(let i=0;i<shopcart.length;i++){
-            if(shopcart[i].id==id){
-                var n=shopcart[i].number;
-                this.$set(shopcart[i],'number',++n);
-                is_shopcart=true;
-                break
-            }
-        };
-        if(!is_shopcart){
-            for(let i=0;i<dataGoods.length;i++){
-                if(dataGoods[i].id==id){
-                    data=deepCopy(dataGoods[i]);
-                    data.number=1;
+//          参数 obj={id:id,event:event};
+        if(!this.balls[0].show){
+           let this_goods= this.dataGoods.filter(function(element){
+                if(element.id==obj.id){
+                    return true;
+                }else{
+                    return false;
+                }
+           });
+           console.log(this_goods);
+            this.balls[0].imgurl=this_goods[0].imgsrc;
+            this.launch (obj.event)
+
+            var id=obj.id;
+            var shopcart=this.shopcart;
+            var dataGoods=this.dataGoods;
+            var is_shopcart=false;
+            var data='';
+            var deepCopy= function(source) {
+                var result={};
+                for (var key in source) {
+                    result[key] = typeof source[key]==='object'? deepCoyp(source[key]): source[key];
+                }
+                return result;
+            };
+            for(let i=0;i<shopcart.length;i++){
+                if(shopcart[i].id==id){
+                    var n=shopcart[i].number;
+                    this.$set(shopcart[i],'number',++n);
+                    is_shopcart=true;
                     break
                 }
             };
-            shopcart.push(data)
+            if(!is_shopcart){
+                for(let i=0;i<dataGoods.length;i++){
+                    if(dataGoods[i].id==id){
+                        data=deepCopy(dataGoods[i]);
+                        data.number=1;
+                        break
+                    }
+                };
+                shopcart.push(data)
+            }
         }
+
     },
     addNum(id,index){
         this.shopcart[index].number++;
@@ -137,9 +144,11 @@ export default {
                   el.style.display = 'block';
                   el.style.webkitTransforrm = `translate3d(0,${top}px,0)`;
                   el.style.transform = `translate3d(0,${top}px,0)`;
+                  el.style.opacity='1';
                   let inner = document.getElementsByClassName('shop_ball')[0];
                   inner.style.webkitTransform = `translate3d(${left}px,0,0)`;
                   inner.style.transform = `translate3d(${left}px,0,0)`;
+                  inner.style.opacity='1';
               }
           }
       },
@@ -153,20 +162,24 @@ export default {
           let top=window.innerHeight-button_bar.height-50;
 
           this.$nextTick(() => {
-
-//              console.log(_top)
+              setTimeout(function(){
+                  done();
+              },(time-0.1)*1000)
               el.style.display = 'block';
               el.style.webkitTransform = `translate3d(0,${top}px,0)`;
               el.style.transform = `translate3d(0,${top}px,0)`;
               el.style.webkitTransitionDuration = `${time}`;
               el.style.transitionDuration = `${time}`;
+              el.style.opacity='0.15';
               let inner = document.getElementsByClassName('shop_ball')[0];
               inner.style.webkitTransform = 'translate3d(0,0,0)';
               inner.style.transform = 'translate3d(0,0,0)';
               inner.style.webkitTransitionDuration = `${time}`;
               inner.style.transitionDuration = `${time}`;
+              inner.style.opacity='0.15';
           });
-          done();
+
+
       },
       afterEnter (el) {
           let ball = this.balls[0];
@@ -203,7 +216,7 @@ body{
   .shop_ball{
     color: #fff;
     font-weight: 700;
-    background: blue;
+    background: transparent;
     width: 3.5rem;
     border-radius: 50%;
     height: 3.5rem;
